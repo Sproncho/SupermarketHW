@@ -2,14 +2,16 @@ package telran.supermarket.dao;
 
 import telran.supermarket.model.Product;
 
+import java.security.ProtectionDomain;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class SuperMarketImpl implements SuperMarket,Iterable<Product> {
-    ArrayList<Product> productList = new ArrayList<Product>();
+    Collection<Product> productList = new ArrayList<Product>();
     @Override
     public boolean addProduct(Product product) {
         if(findByBarcode(product.getBarCode())  != null){
@@ -79,7 +81,7 @@ public class SuperMarketImpl implements SuperMarket,Iterable<Product> {
 
             @Override
             public Product next() {
-                Product data = productList.get(ind);
+                Product data = ((ArrayList<Product>)productList).get(ind);
                 ind++;
                 return data;
             }
